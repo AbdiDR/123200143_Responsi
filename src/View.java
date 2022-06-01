@@ -92,7 +92,6 @@ public class View extends JFrame {
     }
 
     public String getJumlah() {
-        System.out.println();
         return tfJumlah.getText();
     }
 
