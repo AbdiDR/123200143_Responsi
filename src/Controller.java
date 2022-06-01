@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,26 +16,70 @@ public class Controller {
         this.View = View;
 
         if (Model.getBanyakData()!=0) {
-            //String dataMovie[][] = Model.MovieList();
-            //View.table.setModel((new JTable(dataMovie, View.namaKolom)).getModel());
+            String[][] dataTransaksi = Model.Transaction();
+            View.table.setModel((new JTable(dataTransaksi, View.namaKolom)).getModel());
         }
         else {
             JOptionPane.showMessageDialog(null, "Data Tidak Ada");
         }
-
-        View.btnUpdate.addActionListener(new ActionListener() {
+        View.btnAdd.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
-                String kode = View.getKode();
+            public void actionPerformed(ActionEvent ae){
+                String id = View.getId();
+                String namab = View.getNamaB();
                 String nama = View.getNama();
-                String kategori = View.getKategori();
-                String harga = View.getHarga();
                 String jumlah = View.getJumlah();
-                //Model.updateMovie(kode, nama, kategori, harga, jumlah);
+                String hargas = View.getHargas();
+                String diskon = View.getDiskon();
+                double hargad = View.getHargad();
+                Model.insert(id, namab, nama, jumlah, hargas, diskon, hargad);
 
-                //String dataMovie[][] = Model.MovieList();
-                //View.table.setModel((new JTable(dataMovie, View.namaKolom)).getModel());
+                String[][] dataTransaksi = Model.Transaction();
+                View.table.setModel((new JTable(dataTransaksi, View.namaKolom)).getModel());
             }
+
+        });
+
+        View.btnUpdate.addActionListener(ae -> {
+            String id = View.getId();
+            String namab = View.getNamaB();
+            String nama = View.getNama();
+            String jumlah = View.getJumlah();
+            String hargas = View.getHargas();
+            String diskon = View.getDiskon();
+            double hargad = View.getHargad();
+
+            Model.updateTransaksi(id, namab, nama, jumlah, hargas, diskon, hargad);
+
+            String[][] dataTransaksi = Model.Transaction();
+            View.table.setModel((new JTable(dataTransaksi, View.namaKolom)).getModel());
+        });
+        View.btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae){
+                String id = View.getId();
+                int input = JOptionPane.showConfirmDialog(null, "Apakah anda ingin menghapus transaksi dengan id " + id + "?", "Pilih opsi..", JOptionPane.YES_NO_OPTION);
+                if(input == 0){
+                    Model.delete(id);
+                    String[][] dataTransaksi = Model.Transaction();
+                    View.table.setModel((new JTable(dataTransaksi, View.namaKolom)).getModel());
+                }else{
+                    JOptionPane.showMessageDialog(null, "Tidak jadi menghapus");
+                }
+            }
+
+        });
+        View.btnClear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae){
+                View.tfId.setText("");
+                View.tfNamaB.setText("");
+                View.tfNama.setText("");
+                View.tfJumlah.setText("");
+                View.tfHargas.setText("");
+                View.tfDiskon.setText("");
+            }
+
         });
 
         View.table.addMouseListener(new MouseAdapter() {
@@ -51,4 +96,5 @@ public class Controller {
 
 
     }
+
 }
