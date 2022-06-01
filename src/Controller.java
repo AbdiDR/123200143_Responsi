@@ -9,8 +9,7 @@ public class Controller {
     Model Model;
     View View;
 
-    public String pilihanData;
-
+    public String pilid, pilnamab, pilnama, piljumlah, pilhargas, pildiskon;
     public Controller(Model Model, View View) {
         this.Model = Model;
         this.View = View;
@@ -88,8 +87,19 @@ public class Controller {
                 super.mousePressed(e);
                 int baris = View.table.getSelectedRow();
 
-                pilihanData = View.table.getValueAt(baris, 0).toString();
-                System.out.println(pilihanData);
+                pilid = View.table.getValueAt(baris, 0).toString();
+                pilnamab = View.table.getValueAt(baris, 1).toString();
+                pilnama = View.table.getValueAt(baris, 2).toString();
+                piljumlah = View.table.getValueAt(baris, 3).toString();
+                pilhargas = View.table.getValueAt(baris, 4).toString();
+                pildiskon = View.table.getValueAt(baris, 5).toString();
+
+                View.tfId.setText(pilid);
+                View.tfNamaB.setText(pilnamab);
+                View.tfNama.setText(pilnama);
+                View.tfJumlah.setText(piljumlah);
+                View.tfHargas.setText(pilhargas);
+                View.tfDiskon.setText(pildiskon);
             }
         });
 

@@ -9,7 +9,7 @@ public class View extends JFrame {
     JLabel lNama = new JLabel("Nama Kasir");
     JLabel lJumlah = new JLabel("Jumlah");
     JLabel lHargas = new JLabel("Harga satuan");
-    JLabel lDiskon = new JLabel("Diskon");
+    JLabel lDiskon = new JLabel("Diskon (%)");
 
 
 
