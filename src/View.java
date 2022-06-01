@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -90,6 +92,8 @@ public class View extends JFrame {
     }
 
     public String getJumlah() {
+        System.out.println();
         return tfJumlah.getText();
     }
+
 }
